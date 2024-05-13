@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=500, initial-scale=1" />
+
+    <!-- Change this to your name-->
+    <meta name="author" content="Misato Yoshimoto" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <title>WEB222 Music App</title>
+    <!-- Classless CSS Stylesheet - https://watercss.kognise.dev/ -->
+    <link rel="stylesheet" href="public/css/water.css" />
+    <link rel="stylesheet" href="public/css/card.css" />
+  </head>
+  <body>
+    <header>
+      <!-- Change this to your App's info -->
+      <h1>J-Pop/Rock Star</h1>
+      <p>Check out the five popular J-Pop/Rock artists!!</p>
+    </header>
+
+    <main>
+      <div class="artist-cards">
+        <!-- Dynamically create artist cards here -->
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            const artists = window.artists;
+            const songs = window.songs;
+            const artistCardsContainer = document.querySelector(
+              ".artist-cards"
+            );
+            const artistDetailsContainer = document.querySelector(
+              ".artist-details"
+            );
+
+            function createArtistCards() {
+              artists.forEach(function (artist) {
+                const card = document.createElement("div");
+                card.classList.add("artist-card");
+
+                const image = document.createElement("img");
+                image.src = "img/" + artist.name + ".webp";
+                image.alt = "img/" + artist.name + " Image";
+
+                const artistName = document.createElement("h3");
+                artistName.textContent = artist.name;
+
+                const socialMediaLinks = document.createElement("div");
+                socialMediaLinks.classList.add("social-links");
+                artist.urls.forEach(function (urlInfo) {
+                  const link = document.createElement("a");
+                  link.href = urlInfo.url;
+                  link.textContent = urlInfo.name;
+
+                  link.target = "_blank";
+                  socialMediaLinks.appendChild(link);
+
+                  const lineBreak = document.createElement("br");
+                  socialMediaLinks.appendChild(lineBreak);
+                });
+
+                card.appendChild(image);
+                card.appendChild(artistName);
+                card.appendChild(socialMediaLinks);
+
+                card.addEventListener("click", function () {
+                  console.log("Clicked artist card:", artist);
+                  displayArtistDetails(artist);
+                });
+                artistCardsContainer.appendChild(card);
+              });
+            }
+            createArtistCards();
+          });
+        </script>
+      </div>
+      <hr style="border-top: 1px solid rgba(59, 37, 37, 0.258);" />
+      <div id="songs">
+        <script>
+          // functions for details of artists.
+          function displayArtistDetails(selectedArtist) {
+            const filterSongs = window.songs.filter(function (song) {
+              return (
+                song.artistId === selectedArtist.artistId && !song.explicit
+              );
+            });
+            // const newWindow = window.open("", "_blank");
+
+            const songsContainer = document.querySelector("#songs");
+            songsContainer.innerHTML = "";
+
+            filterSongs.forEach(function (song) {
+              const songCard = document.createElement("div");
+              songCard.classList.add("song-card");
+
+              const image = document.createElement("img");
+              image.src = song.name + "1.webp";
+              image.alt = song.name + " Image";
+
+              image.addEventListener("click", function () {
+                window.open(song.url, "_blank");
+              });
+
+              const detailsContainer = document.createElement("div");
+              detailsContainer.classList.add("song-details");
+              const songTitle = document.createElement("h4");
+
+              songTitle.innerHTML = `<a href="${
+                song.url
+              }" target="_blank">${song.title.replace(/\n/g, "<br>")}</a>`;
+
+              songTitle.style.color = "rgb(59, 37, 37)";
+
+              const songInfo = document.createElement("p");
+              songInfo.textContent = `Year: ${
+                song.year
+              } \n Duration: ${getFormattedDuration(song.duration)}`;
+
+              detailsContainer.appendChild(songTitle);
+              detailsContainer.appendChild(songInfo);
+              songCard.appendChild(image);
+              songCard.appendChild(detailsContainer);
+
+              songCard.addEventListener("click", function () {
+                console.log(song); // Log or perform an action when a song card is clicked
+              });
+
+              songsContainer.appendChild(songCard);
+              // this is used like focust that move the screen to the new loaded contents.
+              songCard.scrollIntoView({ behavior: "smooth", block: "start" });
+            });
+          }
+
+          function getFormattedDuration(duration) {
+            const minutes = Math.floor(duration / 60);
+            const seconds = duration % 60;
+            const formattedSeconds = seconds.toString().padStart(2, "0");
+            return `${minutes}:${formattedSeconds}`;
+          }
+        </script>
+      </div>
+    </main>
+
+    <!-- JavaScript Data Files -->
+    <script src="./public/js/artists.js"></script>
+    <script src="./public/js/songs.js"></script>
+
+    <!-- Main App JavaScript File -->
+    <script src="./public/js/app.js"></script>
+  </body>
+</html>
