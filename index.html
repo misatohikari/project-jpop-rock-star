@@ -14,7 +14,7 @@
       href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Roboto&display=swap"
       rel="stylesheet"
     />
-    <title>WEB222 Music App</title>
+    <title>J-Pop/Rock Star</title>
     <!-- Classless CSS Stylesheet - https://watercss.kognise.dev/ -->
     <link rel="stylesheet" href="public/css/water.css" />
     <link rel="stylesheet" href="public/css/card.css" />
@@ -47,7 +47,7 @@
 
                 const image = document.createElement("img");
                 image.src = "img/" + artist.name + ".webp";
-                image.alt = "img/" + artist.name + " Image";
+                image.alt = artist.name + " Image";
 
                 const artistName = document.createElement("h3");
                 artistName.textContent = artist.name;
@@ -101,7 +101,7 @@
               songCard.classList.add("song-card");
 
               const image = document.createElement("img");
-              image.src = song.name + "1.webp";
+              image.src = "img/" + song.name + "1.webp";
               image.alt = song.name + " Image";
 
               image.addEventListener("click", function () {
