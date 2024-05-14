@@ -17,6 +17,7 @@ The homepage displays artist cards for five popular J-Pop/Rock artists: Aimyon, 
 **Song Details:**
 
 Upon clicking on an artist card, users are presented with details about the selected artist, including their name and a list of songs. Each song card displays the song title, release year, duration, and a link to listen to the song on YouTube. Users can click on a song card to listen to the song or access additional information.
+
 ![alt text](./md/img/music_detail_artist.png)
 
 ![alt text](./md/img/music_youtube.png)
