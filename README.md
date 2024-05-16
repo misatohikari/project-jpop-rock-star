@@ -2,7 +2,8 @@
 
 ![alt text](./md/img/music_home.png)
 
-The J-Pop/Rock Star web application is a platform designed to showcase popular J-Pop/Rock artists and their music. Users can explore artists' profiles, discover their top songs, and access their official social media links.
+**Overview** \
+The J-Pop/Rock Star web-based platform offers users an immersive experience to explore and engage with J-Pop/Rock artists and songs. With features like dynamic artist cards, user interaction enhancements, and detailed song information, the application provides a seamless platform for J-Pop/Rock enthusiasts to discover music and connect with their favorite artists.
 
 ## **Key Features**
 
